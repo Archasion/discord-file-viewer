@@ -8,7 +8,7 @@
     "typescript": "^5.0.0"
   },
   "scripts": {
-    "start": "bun server.js"
+    "start": "bun server.ts"
   },
   "type": "module",
   "dependencies": {
