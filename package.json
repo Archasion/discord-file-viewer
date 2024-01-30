@@ -1,6 +1,6 @@
 {
   "name": "dfv",
-  "module": "server.ts",
+  "module": "out/server.js",
   "devDependencies": {
     "@types/bun": "latest"
   },
@@ -8,7 +8,9 @@
     "typescript": "^5.0.0"
   },
   "scripts": {
-    "start": "bun server.ts"
+    "start": "bun out/server.js",
+    "test": "bun src/server.ts",
+    "build": "bun build src/* --outdir out --minify --target bun"
   },
   "type": "module",
   "dependencies": {

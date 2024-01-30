@@ -1,5 +1,5 @@
 import { test, expect } from "bun:test";
-import { parsePort } from "../utils.ts";
+import { parsePort } from "../src/utils.ts";
 
 test("port", () => {
     expect(parsePort("8080")).toBe(8080);
