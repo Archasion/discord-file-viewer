@@ -3,8 +3,10 @@ name: Build and Deploy
 on:
   push:
     branches:
-      - main
       - gh-pages
+
+permissions:
+  contents: write
 
 jobs:
   build:
