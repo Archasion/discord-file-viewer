@@ -7,6 +7,9 @@
   "peerDependencies": {
     "typescript": "^5.0.0"
   },
+  "scripts": {
+    "start": "bun server.js"
+  },
   "type": "module",
   "dependencies": {
     "@fastify/rate-limit": "^9.1.0",
