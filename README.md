@@ -1,24 +1,13 @@
-# Discord File Content Visualizer
+# Discord File Viewer
 
-The endpoint used to access the visualizer is `/attachments?url={encoded_url}`
+The endpoint used to access the visualizer is `/files?url={encoded_file_url}`
 
-## Self-hosting
-
-To install dependencies:
-
-```bash
-bun install
+Test the server using `vercel dev`
 ```
-
-To run:
-
-```bash
-bun run build
-bun start
-```
-
-To run without compiling:
-
-```bash
 bun run test
+```
+
+Start the server using `vercel --prod`
+```
+bun run deploy
 ```
