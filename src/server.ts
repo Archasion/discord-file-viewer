@@ -2,33 +2,31 @@ import Fastify, { type FastifyRequest } from "fastify";
 import { parsePort } from "./utils.ts";
 
 // Set up the server
-const fastify = Fastify({
+export const fastify = Fastify({
     logger: process.env.NODE_ENV === "development"
 });
 
 // Set up a rate limiter to prevent abuse of Discord's API
 await fastify.register(import("@fastify/rate-limit"), {
-    max: 25, // Half of Discord's rate limit (50/sec)
+    max: 45, // Slightly lower than Discord's rate limit (50/sec)
     timeWindow: 1000
 });
 
 // Base response
 fastify.get("/", (_req, res) => {
-    res.send("FORMAT: /:channelId/:attachmentId/:filename");
+    res.send("FORMAT: /attachments?url={encoded_url}");
 });
 
 // Get the raw content of a file
-fastify.get("/:channelId/:attachmentId/:filename", async (req: FastifyRequest<{ Params: AttachmentParams }>, res) => {
-    const { channelId, attachmentId, filename } = req.params;
-
+fastify.get("/attachments", async (req: FastifyRequest<{ Querystring: Record<"url", string> }>, res) => {
     try {
-        const url = `https://cdn.discordapp.com/attachments/${channelId}/${attachmentId}/${filename}.txt`;
+        const url = decodeURIComponent(req.query.url);
         const response = await fetch(url);
         const content = await response.text();
 
         res.send(content);
     } catch (err) {
-        res.send("Failed to fetch file content, please double-check the input");
+        res.send("Failed to fetch file content, please double-check the query");
     }
 });
 
@@ -40,10 +38,4 @@ try {
 } catch (error) {
     fastify.log.error(error);
     process.exit(1);
-}
-
-interface AttachmentParams {
-    channelId: string;
-    attachmentId: string;
-    filename: string;
 }
