@@ -10,7 +10,8 @@
   "scripts": {
     "start": "bun out/server.js",
     "test": "bun src/server.ts",
-    "build": "bun build src/* --outdir out --minify --target bun"
+    "build": "bun build src/* --outdir out --minify --target bun",
+    "vercel-build": "echo Hello, World!"
   },
   "type": "module",
   "dependencies": {

@@ -39,3 +39,5 @@ try {
     fastify.log.error(error);
     process.exit(1);
 }
+
+export default fastify;
