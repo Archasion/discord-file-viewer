@@ -1,14 +1,13 @@
-import routes from "../src/app";
 import Fastify, { type FastifyReply, type FastifyRequest } from "fastify";
+import routes from "../src/app";
 
-// Instantiate Fastify with some config
 const app = Fastify({
-    logger: false,
+    logger: process.env.NODE_ENV === "development"
 });
 
-app.register(routes, { prefix: "/" });
+app.register(routes);
 
 export default async (req: FastifyRequest, res: FastifyReply) => {
     await app.ready();
     app.server.emit("request", req, res);
-};
+}

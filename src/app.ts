@@ -1,6 +1,6 @@
-import type { FastifyInstance, FastifyRequest, FastifyServerOptions } from "fastify";
+import type { FastifyInstance, FastifyPluginOptions, FastifyRequest } from "fastify";
 
-async function app(fastify: FastifyInstance, _opts: FastifyServerOptions, done: Function) {
+async function app(fastify: FastifyInstance, _opts: FastifyPluginOptions) {
     fastify.get("/", async (_req, res) => {
         res.send("FORMAT: /attachments?url={encoded_url}");
     });
@@ -16,8 +16,6 @@ async function app(fastify: FastifyInstance, _opts: FastifyServerOptions, done: 
             res.send("Failed to fetch file content, please double-check the parameters");
         }
     });
-
-    done();
 }
 
 export default app;
