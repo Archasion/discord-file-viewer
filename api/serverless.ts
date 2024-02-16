@@ -12,13 +12,13 @@ await fastify.register(fastifyRateLimit, {
     timeWindow: 1000 // 1 second
 });
 
-// Index route
-fastify.get("/", (_req: FastifyRequest, res: FastifyReply) => {
-    res.send("FORMAT: /files?url={encoded_url}");
-});
+fastify.get("/", async (req: FastifyRequest<FileViewerQueryParams>, res: FastifyReply) => {
+    if (!req.query.url) {
+        res.send("FORMAT: /?url={ENCODED_FILE_URL}");
+        return;
+    }
 
-// File viewer route
-fastify.get("/files", async (req: FastifyRequest<FileViewerQueryParams>, res: FastifyReply) => {
+    // File viewer
     try {
         const url = decodeURIComponent(req.query.url);
         const response = await fetch(url);
@@ -39,6 +39,6 @@ export default async (req: FastifyRequest, res: FastifyReply): Promise<void> => 
 
 interface FileViewerQueryParams {
     Querystring: {
-        url: string;
+        url?: string;
     }
 }

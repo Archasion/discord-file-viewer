@@ -7,9 +7,9 @@
 Fetches a Discord text file by its URL and returns its content. Can be used to improve mobile accessibility by offering
 a web view of a file, instead of having to download it.
 
-| Label       | Route                           |
-|-------------|---------------------------------|
-| File viewer | `/files?url={ENCODED_FILE_URL}` |
+| Label       | Route                      |
+|-------------|----------------------------|
+| File viewer | `/?url={ENCODED_FILE_URL}` |
 
 ## Deployment
 
